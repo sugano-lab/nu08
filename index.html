@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/moon.css" id="theme"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <base target="_blank" rel="noopener">
 <style>.reveal section {font-size: 80%;}</style>
 </head>
@@ -23,7 +24,7 @@
 <section>
 <section id="slide-1">
 <h2 id="1"><span class="section-number-2">1.</span> 調査概要</h2>
-<table id="org1f3ec90" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org13e38cf" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">&#34920;1:</span> 学生意識調査2008 nu08</caption>
 
 <colgroup>
@@ -81,10 +82,609 @@
 <section id="slide-2">
 <h2 id="2"><span class="section-number-2">2.</span> データ構造</h2>
 
-<div id="org5e41d72" class="figure">
+<div id="org55ca77a" class="figure">
 <p><img src="figures/nu08-info-reveal-R-ggpairs-01.png" alt="nu08-info-reveal-R-ggpairs-01.png" width="720" />
 </p>
 <p><span class="figure-number">&#22259;1:  </span>学生意識調査2008 nu08</p>
+</div>
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-3">
+<h2 id="3"><span class="section-number-2">3.</span> 比率の差の検定 1</h2>
+<p>
+仮定
+</p>
+
+<ul>
+<li>独立（無作為割当か、無作為抽出）</li>
+<li>十分なサンプルサイズ
+<ul>
+<li>片側検定：最低でも、セルに10以上</li>
+<li>両側検定：最低でも、セルに5以上</li>
+
+</ul></li>
+
+</ul>
+
+<p>
+仮説
+</p>
+<ul>
+<li>帰無仮説：母比率に差がない
+<ul>
+<li>\(H_0: \pi_1 - \pi_2 = 0\)</li>
+
+</ul></li>
+<li>対立仮説：母比率に差がある
+<ul>
+<li>\(H_a: \pi_1 - \pi_2 \neq 0\)</li>
+
+</ul></li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-4">
+<h2 id="4"><span class="section-number-2">4.</span> 比率の差の検定 2</h2>
+<div>
+\begin{equation*}
+\mbox{検定統計量} z = \frac{\mbox{標本比率の差} - \mbox{母比率の差}}{\mbox{差の標準誤差}}
+\end{equation*}
+
+</div>
+
+<p>
+帰無仮説においては母比率に差がないので、母比率の差 = 0
+</p>
+
+
+<div>
+\begin{eqnarray*}
+\mbox{検定統計量} z &=& \frac{\mbox{標本比率の差} - 0}{\mbox{差の標準誤差}}\\
+                    &=& \frac{\mbox{標本比率の差}}{\mbox{差の標準誤差}}
+\end{eqnarray*}
+
+</div>
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-5">
+<h2 id="5"><span class="section-number-2">5.</span> 比率の差の検定 3</h2>
+<p>
+以上を数式で表すと&#x2026;
+</p>
+
+<div>
+\begin{eqnarray*}
+z &=& \frac{(\hat{p}_1 - \hat{p}_2) - (\pi_1 - \pi_2)}{se_0}\\
+  &=& \frac{\hat{p}_1 - \hat{p}_2}{se_0}
+\end{eqnarray*}
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-6">
+<h2 id="6"><span class="section-number-2">6.</span> 比率の差の検定 4</h2>
+<p>
+分母に含まれる \(se_0\) （差の標準誤差）は
+</p>
+
+<div>
+\begin{equation*}
+se_0 = \sqrt{\hat{p} (1-\hat{p}) (\frac{1}{n_1} + \frac{1}{n_2}) }
+\end{equation*}
+
+</div>
+
+
+<p>
+上式中の \(\hat{p}\) （プールした比率）は
+</p>
+
+<div>
+\begin{equation*}
+\hat{p} = \frac{n_1 \hat{p_1} + n_2 \hat{p_2}}{n_1 + n_2}
+\end{equation*}
+
+</div>
+
+<ul>
+<li>※ Inferential Statistics 1.05 Two independent proportions 動画の \(\hat{p}\) の分子の - は間違い、 + が正しい</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-7">
+<h2 id="7"><span class="section-number-2">7.</span> 比率の差の検定 5</h2>
+<p>
+まとめると
+</p>
+
+<div>
+\begin{eqnarray*}
+\mbox{検定統計量} z &=& \frac{\hat{p}_1 - \hat{p}_2}{se_0}\\
+\mbox{差の標準誤差} se_0 &=& \sqrt{\hat{p} (1-\hat{p}) (\frac{1}{n_1} + \frac{1}{n_2}) }\\
+\mbox{プールされた比率} \hat{p} &=& \frac{n_1 \hat{p_1} + n_2 \hat{p_2}}{n_1 + n_2}
+\end{eqnarray*}
+
+</div>
+
+<ul>
+<li>※ Inferential Statistics 1.05 Two independent proportions 動画の \(\hat{p}\) の分子の - は間違い、 + が正しい</li>
+
+</ul>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-8">
+<h2 id="8"><span class="section-number-2">8.</span> 比率の差の検定 6</h2>
+<ul>
+<li>(53) 交際相手には何を求めますか（複数回答可）
+<ol>
+<li>包容力</li>
+<li>優しさ</li>
+<li>外見・スタイル</li>
+<li>経済力</li>
+<li>自分のことをどれ位好きでいてくれるか</li>
+<li>趣味が合う</li>
+<li>会話が楽しい</li>
+<li>その他（　　　　　　　　）</li>
+
+</ol></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-9">
+<h2 id="9"><span class="section-number-2">9.</span> 比率の差の検定 7</h2>
+<p>
+交際相手に <b>包容力</b> を求める比率に、男女差があるか
+</p>
+
+<p>
+仮説
+</p>
+
+<ul>
+<li>帰無仮説：相手に <b>包容力</b> を求める母比率に、男女差はない
+<ul>
+<li>\(H_0: \pi_1 - \pi_2 = 0\)</li>
+
+</ul></li>
+
+<li>対立仮説：相手に <b>包容力</b> を求める母比率に、男女差がある
+<ul>
+<li>\(H_a: \pi_1 - \pi_2 \neq 0\)</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-10">
+<h2 id="10"><span class="section-number-2">10.</span> 比率の差の検定 8</h2>
+<p>
+性別×交際相手に包容力を求める
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">交際相手に包容力を求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-right">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-right">91</td>
+<td class="org-right">216</td>
+<td class="org-right">307</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-right">188</td>
+<td class="org-right">115</td>
+<td class="org-right">303</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-11">
+<h2 id="11"><span class="section-number-2">11.</span> 比率の差の検定 9</h2>
+<ul>
+<li>調査の結果、相手に <b>包容力</b> を求める標本比率には、男女差がありそう</li>
+<li>だが、どのくらいの差があれば、母比率でも男女差があると思ってよいのか、わからない</li>
+
+</ul>
+
+
+
+<div id="org8d1f342" class="figure">
+<p><img src="figures/nu08-info-reveal-R-mosaicplot-a1-a311.png" alt="nu08-info-reveal-R-mosaicplot-a1-a311.png" width="480" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>性別×交際相手に包容力を求める (nu08)</p>
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-12">
+<h2 id="12"><span class="section-number-2">12.</span> 比率の差の検定 10</h2>
+<table id="orgc01ffec" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;2:</span> 性別×交際相手に包容力を求める</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">交際相手に包容力を求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-right">合計</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-right">91</td>
+<td class="org-right">216</td>
+<td class="org-right">307</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-right">188</td>
+<td class="org-right">115</td>
+<td class="org-right">303</td>
+</tr>
+</tbody>
+</table>
+
+
+<div>
+\begin{eqnarray*}
+\hat{p}_1 &=& 91 \div (91 + 216) \fallingdotseq 0.3\\
+\hat{p}_2 &=& 188 \div (18 + 115) \fallingdotseq 0.62
+\end{eqnarray*}
+
+</div>
+
+
+
+<table id="org5482a2d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;3:</span> 性別×交際相手に包容力を求める</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">交際相手に包容力を求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-right">合計</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-left">\(\hat{p}_1 = 0.3\)</td>
+<td class="org-right">0.7</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-left">\(\hat{p}_2 = 0.62\)</td>
+<td class="org-right">0.38</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-13">
+<h2 id="13"><span class="section-number-2">13.</span> 比率の差の検定 11</h2>
+<table id="orgc01f4f6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;4:</span> 性別×交際相手に包容力を求める</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">交際相手に包容力を求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-left">合計</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-right">91</td>
+<td class="org-right">216</td>
+<td class="org-left">\(n_1 = 307\)</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-right">188</td>
+<td class="org-right">115</td>
+<td class="org-left">\(n_2 = 303\)</td>
+</tr>
+
+<tr>
+<td class="org-left">合計</td>
+<td class="org-right">279</td>
+<td class="org-right">331</td>
+<td class="org-left">610</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<div>
+\begin{eqnarray*}
+\mbox{プールされた比率} \hat{p} &=& (91 + 188) \div (91 + 216 + 188 + 115)\\
+        &=& 279 \div 610\\
+        &\fallingdotseq& 0.46
+\end{eqnarray*}
+
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-14">
+<h2 id="14"><span class="section-number-2">14.</span> 比率の差の検定 12</h2>
+<div>
+\begin{eqnarray*}
+\mbox{プールされた比率} \hat{p} &=& \frac{n_1 \hat{p_1} + n_2 \hat{p_2}}{n_1 + n_2} \fallingdotseq 0.46\\
+\mbox{標準誤差} se_0 &=& \sqrt{\hat{p} (1-\hat{p}) (\frac{1}{n_1} + \frac{1}{n_2}) }\\
+     &=& \sqrt{0.46 \times (1-0.46) (\frac{1}{307} + \frac{1}{303}) }\\
+     &\fallingdotseq& \sqrt{0.2484 \times 0.00655}\\
+     &\fallingdotseq& \sqrt{0.0016} \fallingdotseq 0.04\\
+\mbox{検定統計量} z &=& \frac{\hat{p}_1 - \hat{p}_2}{se_0} \fallingdotseq \frac{0.3 - 0.62}{0.04} \fallingdotseq -8
+\end{eqnarray*}
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-15">
+<h2 id="15"><span class="section-number-2">15.</span> 比率の差の検定 13</h2>
+<div>
+\begin{equation*}
+\mbox{検定統計量} z = \frac{\hat{p}_1 - \hat{p}_2}{se_0} \fallingdotseq \frac{0.3 - 0.62}{0.04} \fallingdotseq -8
+\end{equation*}
+
+</div>
+
+<ul>
+<li>帰無仮説（ <b>包容力</b> を求める比率に男女差がない）のもとでは
+得られた z=-8 以下の確率は非常に小さい（標準正規分布表より）</li>
+
+<li>手元の結果を受け入れ、前提としていた帰無仮説を疑うべき</li>
+
+<li>帰無仮説を棄却する</li>
+
+</ul>
+
+<p>
+結論
+</p>
+
+<ul>
+<li>交際相手に <b>包容力</b> を求める比率には男女差があり、男性に比べ、女性の方が有意に高い</li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-16">
+<h2 id="16"><span class="section-number-2">16.</span> 比率の差の検定 14</h2>
+<p>
+交際相手に <b>優しさ</b> を求める比率に、男女差があるか
+</p>
+
+<p>
+仮説
+</p>
+
+<ul>
+<li>帰無仮説：相手に <b>優しさ</b> を求める母比率に、男女差はない
+<ul>
+<li>\(H_0: \pi_1 - \pi_2 = 0\)</li>
+
+</ul></li>
+
+<li>対立仮説：相手に <b>優しさ</b> を求める母比率に、男女差がある
+<ul>
+<li>\(H_a: \pi_1 - \pi_2 \neq 0\)</li>
+
+</ul></li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-17">
+<h2 id="17"><span class="section-number-2">17.</span> 比率の差の検定 15</h2>
+<p>
+性別×交際相手に <b>優しさ</b> を求める
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">交際相手に優しさを求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-right">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-right">193</td>
+<td class="org-right">114</td>
+<td class="org-right">307</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-right">241</td>
+<td class="org-right">62</td>
+<td class="org-right">303</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-18">
+<h2 id="18"><span class="section-number-2">18.</span> 比率の差の検定 16</h2>
+<ul>
+<li>調査の結果、相手に <b>優しさ</b> を求める標本比率には、男女差がありそう</li>
+<li>だが、どのくらいの差があれば、母比率でも男女差があると思ってよいのか、わからない</li>
+
+</ul>
+
+
+
+<div id="org2c1a6a5" class="figure">
+<p><img src="figures/nu08-info-reveal-R-mosaicplot-a1-a312.png" alt="nu08-info-reveal-R-mosaicplot-a1-a312.png" width="480" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>性別×交際相手に優しさを求める (nu08)</p>
+</div>
+
+
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-19">
+<h2 id="19"><span class="section-number-2">19.</span> 比率の差の検定 17</h2>
+<p>
+同様に、二群の比率の検定をやってみよう
+</p>
+
+<div>
+\begin{eqnarray*}
+\mbox{プールされた比率} \hat{p} &=& \frac{n_1 \hat{p_1} + n_2 \hat{p_2}}{n_1 + n_2}\\
+\mbox{標準誤差} se_0 &=& \sqrt{\hat{p} (1-\hat{p}) (\frac{1}{n_1} + \frac{1}{n_2}) }\\
+\mbox{検定統計量} z &=& \frac{\hat{p}_1 - \hat{p}_2}{se_0}
+\end{eqnarray*}
+
 </div>
 
 
@@ -97,8 +697,147 @@
 </section>
 </section>
 <section>
-<section id="slide-3">
-<h2 id="3"><span class="section-number-2">3.</span> under construction</h2>
+<section id="slide-20">
+<h2 id="20"><span class="section-number-2">20.</span> 比率の差の検定 18</h2>
+<p>
+交際相手に <b>経済力</b> を求める比率に、男女差があるか
+</p>
+
+<p>
+仮説
+</p>
+
+<ul>
+<li>帰無仮説：相手に <b>経済力</b> を求める母比率に、男女差はない
+<ul>
+<li>\(H_0: \pi_1 - \pi_2 = 0\)</li>
+
+</ul></li>
+
+<li>対立仮説：相手に <b>経済力</b> を求める母比率に、男女差がある
+<ul>
+<li>\(H_a: \pi_1 - \pi_2 \neq 0\)</li>
+
+</ul></li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-21">
+<h2 id="21"><span class="section-number-2">21.</span> 比率の差の検定 19</h2>
+<p>
+性別×交際相手に <b>経済力</b> を求める
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">交際相手に経済力を求める</th>
+<th scope="col" class="org-right">非選択（特に求めない）</th>
+<th scope="col" class="org-right">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">男</td>
+<td class="org-right">23</td>
+<td class="org-right">283</td>
+<td class="org-right">306</td>
+</tr>
+
+<tr>
+<td class="org-left">女</td>
+<td class="org-right">83</td>
+<td class="org-right">220</td>
+<td class="org-right">303</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-22">
+<h2 id="22"><span class="section-number-2">22.</span> 比率の差の検定 20</h2>
+<ul>
+<li>調査の結果、相手に <b>経済力</b> を求める標本比率には、男女差がありそう</li>
+<li>だが、どのくらいの差があれば、母比率でも男女差があると思ってよいのか、わからない</li>
+
+</ul>
+
+
+
+<div id="orga9a6d6a" class="figure">
+<p><img src="figures/nu08-info-reveal-R-mosaicplot-a1-a314.png" alt="nu08-info-reveal-R-mosaicplot-a1-a314.png" width="480" />
+</p>
+<p><span class="figure-number">&#22259;4:  </span>性別×交際相手に経済力を求める (nu08)</p>
+</div>
+
+
+
+
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-23">
+<h2 id="23"><span class="section-number-2">23.</span> 比率の差の検定 21</h2>
+<p>
+同様に、二群の比率の検定がやってみよう
+</p>
+
+<div>
+\begin{eqnarray*}
+\mbox{プールされた比率} \hat{p} &=& \frac{n_1 \hat{p_1} + n_2 \hat{p_2}}{n_1 + n_2}\\
+\mbox{標準誤差} se_0 &=& \sqrt{\hat{p} (1-\hat{p}) (\frac{1}{n_1} + \frac{1}{n_2}) }\\
+\mbox{検定統計量} z &=& \frac{\hat{p}_1 - \hat{p}_2}{se_0}
+\end{eqnarray*}
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-24">
+<h2 id="24"><span class="section-number-2">24.</span> 比率の差の検定 22</h2>
+<p>
+結論
+</p>
+<ul>
+<li>男性に比べ、 <b>女性の方が、包容力、経済力、優しさを交際相手に求める</b> らしい</li>
+<li>注：データは、確率標本抽出でも無作為割当でもなく、あくまでも演習用教材のデータです</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-25">
+<h2 id="25"><span class="section-number-2">25.</span> under construction</h2>
 <ul>
 <li>under construction</li>
 
